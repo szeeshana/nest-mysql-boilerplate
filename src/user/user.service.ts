@@ -8,8 +8,8 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import { UserType } from '../user/enum/user.enum';
 import { findService } from '../utils/helpers/find.service.helper';
+import { Role } from './enum/role.enum';
 
 @Injectable()
 export class UserService {
@@ -114,7 +114,7 @@ export class UserService {
       throw new InternalServerErrorException();
     }
   }
-  findUser(email: string, role: UserType) {
+  findUser(email: string, role: Role) {
     try {
       return this.userRepository
         .findOne({

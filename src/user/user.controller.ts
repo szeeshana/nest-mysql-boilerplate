@@ -38,10 +38,15 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  // @Get()
-  // async find() {
-  //   return this.userService.findAll();
-  // }
+  @Get()
+  async find() {
+    return this.userService.findAll();
+  }
+
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    return this.userService.findOne(+id);
+  }
 
   @Patch(':id')
   async update(
@@ -57,32 +62,32 @@ export class UserController {
     return this.userService.remove(+id);
   }
 
-  @Get('pagination')
-  async findPagination(@Query() paginationParams: PaginationParams) {
-    return this.userService.findPagination({
-      offset: paginationParams.offset,
-      limit: paginationParams.limit,
-    });
-  }
+  // @Get('pagination')
+  // async findPagination(@Query() paginationParams: PaginationParams) {
+  //   return this.userService.findPagination({
+  //     offset: paginationParams.offset,
+  //     limit: paginationParams.limit,
+  //   });
+  // }
 
-  @Get()
-  @UseGuards(AuthGuard('jwt'))
-  async findAll() {
-    this.testGateway.emitNotification('event', {
-      testData: { user: 'zeeshan', email: 'z@z.com' },
-    });
-    return this.userService.findAll();
-  }
+  // @Get()
+  // @UseGuards(AuthGuard('jwt'))
+  // async findAll() {
+  //   this.testGateway.emitNotification('event', {
+  //     testData: { user: 'zeeshan', email: 'z@z.com' },
+  //   });
+  //   return this.userService.findAll();
+  // }
 
-  @Get('me')
-  @UseGuards(AuthGuard('jwt'))
-  async findMe(@Req() req) {
-    const userData = await this.userService.findMe(req.user.id);
-    if (!userData) {
-      throw new NotFoundException();
-    }
-    return userData;
-  }
+  // @Get('me')
+  // @UseGuards(AuthGuard('jwt'))
+  // async findMe(@Req() req) {
+  //   const userData = await this.userService.findMe(req.user.id);
+  //   if (!userData) {
+  //     throw new NotFoundException();
+  //   }
+  //   return userData;
+  // }
   // @Get('count')
   // @UseGuards(AuthGuard('jwt'))
   // async findCount() {
@@ -122,11 +127,6 @@ export class UserController {
   //   }
   //   return userData;
   // }
-
-  @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
-  }
 
   // @Get(':id')
   // @UseGuards(AuthGuard('jwt'))

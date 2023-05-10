@@ -6,8 +6,8 @@ import {
   PrimaryGeneratedColumn,
   BaseEntity,
 } from 'typeorm';
-import { UserType } from '../enum/user.enum';
 import { Factory } from 'nestjs-seeder';
+import { Role } from '../enum/role.enum';
 
 @Entity('user')
 export class User extends BaseEntity {
@@ -33,9 +33,9 @@ export class User extends BaseEntity {
   @Factory('USER')
   @Column({
     type: 'enum',
-    enum: UserType,
+    enum: Role,
   })
-  role: UserType;
+  role: Role;
 
   @Column({ default: false })
   isDeleted: boolean;

@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { IsString, IsNotEmpty, IsEmail, IsEnum } from 'class-validator';
-import { UserType } from '../../user/enum/user.enum';
+import { Role } from '../../user/enum/role.enum';
 
 export class RegisterUserDto {
   @ApiProperty()
@@ -30,6 +30,6 @@ export class RegisterUserDto {
 
   @ApiProperty()
   @Transform((value) => value.value.trim())
-  @IsEnum(UserType)
-  role: UserType;
+  @IsEnum(Role)
+  role: Role;
 }

@@ -24,7 +24,7 @@ import { UserService } from './../user/user.service';
 import { RegisterUserDto } from './dto/register.user.dto';
 import { ERROR_MESSAGES } from '../utils/constants/generic.constants';
 import { ApiTags } from '@nestjs/swagger';
-import { UserType } from '../user/enum/user.enum';
+import { Role } from '../user/enum/role.enum';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -47,7 +47,7 @@ export class AuthController {
   // @CacheTTL(100)
   @Post('register')
   async create(@Body() registerUserDto: RegisterUserDto) {
-    if (registerUserDto.role !== UserType.USER) {
+    if (registerUserDto.role !== Role.USER) {
       throw new BadRequestException(ERROR_MESSAGES.ADMIN_CANNOT_CREATE);
     }
     const userData = await this.userService.filter({
